@@ -8,7 +8,22 @@
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
-    <section></section>
+    <section class="gallery">
+      <form class="form">
+        <input
+          type="text"
+          class="input-search"
+          placeholder="Search images..."
+          required
+        />
+
+        <button class="btn-search">Search</button>
+      </form>
+
+      <div class="loader"></div>
+
+      <div class="gallery-container"></div>
+    </section>
 
     <script type="module" src="./js/main.js"></script>
   </body>
