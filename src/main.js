@@ -9,6 +9,14 @@ const form = document.querySelector('.form');
 const input = form.querySelector('.input-search');
 const loader = document.querySelector('.loader');
 
+const lightbox = new SimpleLightbox('.gallery-link', {
+  captions: true,
+  captionSelector: 'img',
+  captionDelay: 250,
+  captionPosition: 'bottom',
+  captionsData: 'alt',
+});
+
 form.addEventListener('submit', imageSearch);
 
 function imageSearch(e) {
@@ -44,7 +52,7 @@ function imageSearch(e) {
       if (images.hits.length) {
         renderImages(images.hits);
 
-        createModal();
+        updateModal();
       } else {
         iziToast.show({
           message: `Sorry, there are no images matching your search query. Please, try again!`,
@@ -58,10 +66,9 @@ function imageSearch(e) {
           iconColor: '#FAFAFB',
         });
       }
-
-      loader.classList.remove('show');
     })
-    .catch(error => console.log(error));
+    .catch(error => console.log(error))
+    .finally(() => loader.classList.remove('show'));
 }
 
 function fetchImages(url) {
@@ -122,14 +129,6 @@ function renderImages(images) {
   gallery.insertAdjacentHTML('beforeend', markup);
 }
 
-function createModal() {
-  const lightbox = new SimpleLightbox('.gallery-link', {
-    captions: true,
-    captionSelector: 'img',
-    captionDelay: 250,
-    captionPosition: 'bottom',
-    captionsData: 'alt',
-  });
-
+function updateModal() {
   lightbox.refresh();
 }
